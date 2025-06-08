@@ -21,6 +21,7 @@ def main():
     all_companies = []
     all_officers = []
 
+# to visualize the progress of data scraping according to their respective functions.
     for number in company_numbers:
         print(f"Scraping company {number}")
         company_info = get_company_data(number)
@@ -29,7 +30,7 @@ def main():
             continue
 
         officer_info = get_officers_data(number)
-        print(f"  Found {len(officer_info)} officers")  # <-- Added status print here
+        print(f"  Found {len(officer_info)} officers")
 
         all_companies.append(company_info)
         all_officers.extend(officer_info)

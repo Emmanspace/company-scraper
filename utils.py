@@ -21,6 +21,7 @@ def get_company_data(company_number):
         tag = soup.select_one(selector)
         return tag.get_text(strip=True) if tag else "N/A"
     
+# function to get the company data.
 def get_company_data(company_number):
     url = f"{BASE_URL}/company/{company_number}"
     r = requests.get(url, headers=HEADERS)
@@ -84,6 +85,7 @@ def get_officers_data(company_number):
             dd = dt.find_next_sibling("dd")
             return dd.get_text(strip=True) if dd else "N/A"
 
+# this is the structure of the generated object, that will be translated into csv file.
         officer = {
             "Company Number": company_number,
             "Officer Name": officer_name,
@@ -92,11 +94,12 @@ def get_officers_data(company_number):
             "Nationality": get_dd_after_dt("nationality"),
             "Country of Residence": get_dd_after_dt("country of residence"),
             "Appointed On": get_dd_after_dt("appointed on"),
-            "Address": get_dd_after_dt("correspondence address")  # or adjust label if needed
+            "Address": get_dd_after_dt("correspondence address")
         }
         officers.append(officer)
     return officers
 
+# function that saves the scraped data from the web into dedicated csv folders.
 def save_to_csv(companies, officers):
     companies_path = os.path.abspath("companies.csv")
     officers_path = os.path.abspath("officers.csv")
